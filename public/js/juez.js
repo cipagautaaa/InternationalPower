@@ -19,12 +19,17 @@
   const idLabel = document.getElementById('judge-id-label')
   const fullscreenBtn = document.getElementById('fullscreen-btn')
   const timerBtn = document.getElementById('timer-btn')
+  const timerBtnLabel = document.getElementById('timer-btn-label')
 
   idLabel.textContent = 'Juez ' + judgeId + (isChief ? ' (jefe)' : '')
-  if (isChief) timerBtn.hidden = false
+  if (isChief) {
+    document.body.classList.add('is-chief')
+    timerBtn.hidden = false
+  }
 
   let currentPhase = 'IDLE'
   let confirmedVote = null
+  let timerRunning = false
 
   const client = createWsClient({
     role: 'judge',
@@ -33,6 +38,7 @@
       currentPhase = msg.phase
       confirmedVote = msg.myVote !== undefined ? msg.myVote : confirmedVote
       updateSelection(confirmedVote)
+      if (isChief) updateTimerButton(msg.timer)
     },
     onAck: () => {
       if (navigator.vibrate) navigator.vibrate(80)
@@ -50,6 +56,12 @@
     redBtn.classList.toggle('selected', vote === 'red')
   }
 
+  function updateTimerButton(timer) {
+    timerRunning = timer.running
+    timerBtn.classList.toggle('running', timerRunning)
+    timerBtnLabel.textContent = timerRunning ? 'Cronómetro en marcha' : 'Iniciar cronómetro'
+  }
+
   function castVote(value) {
     if (currentPhase === 'REVEALED') return
     if (value === confirmedVote) return // ya registrado, no reenviar de más
@@ -60,7 +72,13 @@
   redBtn.addEventListener('click', () => castVote('red'))
 
   if (isChief) {
-    timerBtn.addEventListener('click', () => client.send({ type: 'timer:start' }))
+    timerBtn.addEventListener('click', () => {
+      // Mientras ya está corriendo, un segundo toque no debe reiniciar el
+      // conteo desde 60: se ignora hasta que el servidor confirme que se
+      // detuvo (por revelado o por reset).
+      if (timerRunning) return
+      client.send({ type: 'timer:start' })
+    })
   }
 
   fullscreenBtn.addEventListener('click', () => {

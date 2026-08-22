@@ -63,16 +63,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   padding: 0 12px;
+}
+
+/* El juez 2 (jefe) es el único con el botón de cronómetro: se le da más
+   alto a la franja central solo en su vista para que ese botón sea grande
+   y no pase desapercibido, como sí lo era a 40x40px. */
+body.is-chief #mid-bar {
+  flex-basis: 9vh;
 }
 
 #judge-id-label {
   color: #555;
   font-size: 14px;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
-#mid-bar button {
+#fullscreen-btn {
   background: #1a1a1a;
   color: #777;
   border: 1px solid #333;
@@ -81,10 +90,42 @@ body {
   height: 40px;
   font-size: 18px;
   line-height: 1;
+  flex: 0 0 auto;
 }
 
-#timer-btn[hidden] {
+#timer-btn {
   display: none;
+}
+
+#timer-btn:not([hidden]) {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #1560c4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+#timer-btn-icon {
+  font-size: 3.4vh;
+  line-height: 1;
+}
+
+#timer-btn-label {
+  font-size: 2.2vh;
+}
+
+/* Mientras corre, el botón se apaga visualmente: ya cumplió su función y
+   reiniciarlo a medio intento cortaría el conteo en curso. */
+#timer-btn.running {
+  background: #1c2733;
+  color: #7c93ad;
 }
 
 #disconnect-banner {

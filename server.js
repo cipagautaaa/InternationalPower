@@ -20,12 +20,23 @@ server.listen(config.port, () => {
   printUrls()
 })
 
+// Adaptadores que nunca son la red del evento: switches virtuales de
+// Hyper-V/Docker/WSL, VPNs, etc. Imprimirlos solo confunde a quien está
+// dictando la URL a los celulares — ese adaptador no es alcanzable desde
+// afuera del portátil.
+const VIRTUAL_INTERFACE_PATTERN = /virtual|vethernet|hyper-v|wsl|docker|vmware|virtualbox|tailscale|zerotier|loopback/i
+
 function localIPv4Addresses() {
   const interfaces = os.networkInterfaces()
   const addresses = []
   for (const name of Object.keys(interfaces)) {
+    if (VIRTUAL_INTERFACE_PATTERN.test(name)) continue
     for (const net of interfaces[name]) {
-      if (net.family === 'IPv4' && !net.internal) addresses.push(net.address)
+      // 169.254.x.x es link-local: la asigna Windows cuando no hay DHCP,
+      // nunca es la IP real de la red a la que se conectan los celulares.
+      if (net.family === 'IPv4' && !net.internal && !net.address.startsWith('169.254.')) {
+        addresses.push(net.address)
+      }
     }
   }
   return addresses
