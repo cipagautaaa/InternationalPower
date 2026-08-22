@@ -56,7 +56,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5vmin;
+  gap: 4vmin;
   width: 100%;
 }
 
@@ -64,10 +64,10 @@ body {
    revelado debe pintarse en el mismo frame para los tres círculos, no
    como un fundido o animación escalonada. */
 .light {
-  width: 32vmin;
-  height: 32vmin;
+  width: 46vmin;
+  height: 46vmin;
   border-radius: 50%;
-  border: 0.7vmin solid #444;
+  border: 0.9vmin solid #444;
   background: transparent;
 }
 

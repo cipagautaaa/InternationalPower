@@ -59,7 +59,7 @@
   function updateTimerButton(timer) {
     timerRunning = timer.running
     timerBtn.classList.toggle('running', timerRunning)
-    timerBtnLabel.textContent = timerRunning ? 'Cronómetro en marcha' : 'Iniciar cronómetro'
+    timerBtnLabel.textContent = timerRunning ? 'Reiniciar cronómetro' : 'Iniciar cronómetro'
   }
 
   function castVote(value) {
@@ -72,13 +72,11 @@
   redBtn.addEventListener('click', () => castVote('red'))
 
   if (isChief) {
-    timerBtn.addEventListener('click', () => {
-      // Mientras ya está corriendo, un segundo toque no debe reiniciar el
-      // conteo desde 60: se ignora hasta que el servidor confirme que se
-      // detuvo (por revelado o por reset).
-      if (timerRunning) return
-      client.send({ type: 'timer:start' })
-    })
+    // El mismo botón sirve para arrancar y para reiniciar: mientras el
+    // cronómetro corre, 'timer:start' lo vuelve a poner en la duración
+    // completa (por ejemplo si se acabó el tiempo o el jefe se equivocó
+    // al arrancarlo). El texto cambia según el estado (ver updateTimerButton).
+    timerBtn.addEventListener('click', () => client.send({ type: 'timer:start' }))
   }
 
   fullscreenBtn.addEventListener('click', () => {

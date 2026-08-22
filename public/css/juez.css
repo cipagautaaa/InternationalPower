@@ -121,11 +121,12 @@ body.is-chief #mid-bar {
   font-size: 2.2vh;
 }
 
-/* Mientras corre, el botón se apaga visualmente: ya cumplió su función y
-   reiniciarlo a medio intento cortaría el conteo en curso. */
+/* Mientras corre, el botón cambia de color y de texto (ver juez.js) para
+   dejar claro que ahora es "reiniciar": el mismo botón sirve para volver
+   a poner el cronómetro en la duración completa, por ejemplo si se acabó
+   el tiempo o el jefe lo arrancó por error. */
 #timer-btn.running {
-  background: #1c2733;
-  color: #7c93ad;
+  background: #b45309;
 }
 
 #disconnect-banner {
