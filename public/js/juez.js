@@ -72,11 +72,13 @@
   redBtn.addEventListener('click', () => castVote('red'))
 
   if (isChief) {
-    // El mismo botón sirve para arrancar y para reiniciar: mientras el
-    // cronómetro corre, 'timer:start' lo vuelve a poner en la duración
-    // completa (por ejemplo si se acabó el tiempo o el jefe se equivocó
-    // al arrancarlo). El texto cambia según el estado (ver updateTimerButton).
-    timerBtn.addEventListener('click', () => client.send({ type: 'timer:start' }))
+    // El mismo botón sirve para arrancar y para reiniciar. En reposo manda
+    // 'timer:start' (arranca desde 60). Mientras corre, manda 'timer:reset'
+    // (vuelve a 60 sin arrancarlo — para eso está el botón de "iniciar").
+    // El texto cambia según el estado (ver updateTimerButton).
+    timerBtn.addEventListener('click', () => {
+      client.send({ type: timerRunning ? 'timer:reset' : 'timer:start' })
+    })
   }
 
   fullscreenBtn.addEventListener('click', () => {
