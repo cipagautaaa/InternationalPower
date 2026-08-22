@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.vote-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 8vh;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  /* El aro de confirmación se dibuja hacia adentro para no mover el layout. */
+  box-shadow: inset 0 0 0 0 #ffd60a;
+  transition: box-shadow 80ms ease-out;
+}
+
+#btn-white {
+  background: #f5f5f5;
+  color: #111;
+}
+
+#btn-red {
+  background: #d81f1f;
+  color: #fff;
+}
+
+.vote-btn.selected {
+  box-shadow: inset 0 0 0 14px #ffd60a;
+}
+
+/* Franja neutra entre los dos botones: al menos 40px de zona muerta para
+   evitar toques accidentales entre blanco y rojo. Aquí también viven los
+   controles discretos, porque ya es zona sin voto. */
+#mid-bar {
+  flex: 0 0 56px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+#judge-id-label {
+  color: #555;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+#mid-bar button {
+  background: #1a1a1a;
+  color: #777;
+  border: 1px solid #333;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+#timer-btn[hidden] {
+  display: none;
+}
+
+#disconnect-banner {
+  position: fixed;
+  inset: 0;
+  background: #b00000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9vh;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-align: center;
+  z-index: 9999;
+}
+
+#disconnect-banner[hidden] {
+  display: none;
+}

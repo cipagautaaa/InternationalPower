@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background: #f4f4f4;
+  color: #111;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+#status-panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+#phase-row {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+#votes-in {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #555;
+  margin-left: 8px;
+}
+
+#connections {
+  display: flex;
+  gap: 16px;
+}
+
+.conn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  background: #eee;
+  color: #666;
+}
+
+.conn.connected {
+  background: #d7f5d7;
+  color: #116611;
+}
+
+.conn.disconnected {
+  background: #f8d7d7;
+  color: #a11212;
+}
+
+#actions {
+  display: flex;
+  gap: 12px;
+}
+
+#actions button {
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#reset-btn {
+  background: #444;
+  color: #fff;
+}
+
+#timer-btn {
+  background: #1560c4;
+  color: #fff;
+}
+
+#log table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#log th,
+#log td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.vote-white {
+  color: #666;
+  font-weight: 600;
+}
+
+.vote-red {
+  color: #c00;
+  font-weight: 600;
+}

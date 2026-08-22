@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  cursor: none;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#timer {
+  position: fixed;
+  top: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12vh;
+  font-weight: 900;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+#timer.low {
+  color: #e02020;
+}
+
+#votes-count {
+  position: fixed;
+  top: 22vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #888;
+  font-size: 4vh;
+  letter-spacing: 0.08em;
+}
+
+#votes-count[hidden] {
+  display: none;
+}
+
+#lights {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6vmin;
+  width: 100%;
+}
+
+/* Sin transition en ningún estado de .light: el paso de apagado a
+   revelado debe pintarse en el mismo frame para los tres círculos, no
+   como un fundido o animación escalonada. */
+.light {
+  width: 26vmin;
+  height: 26vmin;
+  border-radius: 50%;
+  border: 0.6vmin solid #444;
+  background: transparent;
+}
+
+.light.white {
+  background: #fff;
+  border-color: #fff;
+}
+
+.light.red {
+  background: #e02020;
+  border-color: #e02020;
+}

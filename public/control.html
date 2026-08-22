@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control</title>
+<link rel="stylesheet" href="/css/control.css">
+</head>
+<body>
+  <h1>Control — Luces de jueces</h1>
+
+  <section id="status-panel">
+    <div id="phase-row">
+      <span id="phase">—</span>
+      <span id="votes-in"></span>
+    </div>
+    <div id="connections">
+      <div id="conn-1" class="conn">Juez 1</div>
+      <div id="conn-2" class="conn">Juez 2</div>
+      <div id="conn-3" class="conn">Juez 3</div>
+    </div>
+  </section>
+
+  <section id="actions">
+    <button id="reset-btn" type="button">Reset manual</button>
+    <button id="timer-btn" type="button">Iniciar cronómetro</button>
+  </section>
+
+  <section id="log">
+    <h2>Últimos intentos</h2>
+    <table>
+      <thead>
+        <tr><th>Hora</th><th>Juez 1</th><th>Juez 2</th><th>Juez 3</th></tr>
+      </thead>
+      <tbody id="log-body"></tbody>
+    </table>
+  </section>
+
+  <script src="/js/ws-client.js"></script>
+  <script src="/js/control.js"></script>
+</body>
+</html>
