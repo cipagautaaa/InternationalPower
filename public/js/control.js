@@ -72,7 +72,7 @@
 
   function voteCell(value) {
     const td = document.createElement('td')
-    td.textContent = value === 'white' ? 'Blanco' : value === 'red' ? 'Rojo' : '—'
+    td.textContent = value === 'white' ? 'Válido' : value === 'red' ? 'Nulo' : '—'
     if (value === 'white' || value === 'red') {
       td.classList.add(value === 'white' ? 'vote-white' : 'vote-red')
     }

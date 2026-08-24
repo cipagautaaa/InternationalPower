@@ -21,7 +21,8 @@
   const timerBtn = document.getElementById('timer-btn')
   const timerBtnLabel = document.getElementById('timer-btn-label')
 
-  idLabel.textContent = 'Juez ' + judgeId + (isChief ? ' (jefe)' : '')
+  const baseIdLabel = 'Juez ' + judgeId + (isChief ? ' (jefe)' : '')
+  idLabel.textContent = baseIdLabel
   if (isChief) {
     document.body.classList.add('is-chief')
     timerBtn.hidden = false
@@ -30,6 +31,7 @@
   let currentPhase = 'IDLE'
   let confirmedVote = null
   let timerRunning = false
+  let votingUnlocked = false
 
   const client = createWsClient({
     role: 'judge',
@@ -38,6 +40,7 @@
       currentPhase = msg.phase
       confirmedVote = msg.myVote !== undefined ? msg.myVote : confirmedVote
       updateSelection(confirmedVote)
+      updateVotingLock(msg.timer.started)
       if (isChief) updateTimerButton(msg.timer)
     },
     onAck: () => {
@@ -62,7 +65,18 @@
     timerBtnLabel.textContent = timerRunning ? 'Reiniciar cronómetro' : 'Iniciar cronómetro'
   }
 
+  // Sin cronómetro arrancado no hay intento en curso: los botones se ven
+  // apagados y no reaccionan al toque, para que quede claro por qué no
+  // pasa nada si un juez vota antes de tiempo. El candado real está en el
+  // servidor (ver registerVote en lib/state.js); esto es solo la señal.
+  function updateVotingLock(started) {
+    votingUnlocked = started
+    document.body.classList.toggle('voting-locked', !votingUnlocked)
+    idLabel.textContent = baseIdLabel + (votingUnlocked ? '' : ' · esperando cronómetro')
+  }
+
   function castVote(value) {
+    if (!votingUnlocked) return
     if (currentPhase === 'REVEALED') return
     if (value === confirmedVote) return // ya registrado, no reenviar de más
     client.sendVote(judgeId, value)

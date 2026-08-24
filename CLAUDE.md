@@ -73,7 +73,7 @@ IDLE  --primer voto-->  VOTING  --tercer voto-->  REVEALED  --reset-->  IDLE
   Opcionalmente puede mostrar cuántos jueces han votado (ej. "2 de 3"), sin indicar
   cuáles ni qué votaron.
 - `REVEALED`: los tres colores aparecen de golpe.
-- Reset: automático a los 8 segundos de `REVEALED`, o manual desde la vista de control.
+- Reset: automático a los 15 segundos de `REVEALED`, o manual desde la vista de control.
 
 Un juez **puede cambiar su voto** presionando el otro botón, pero solo mientras el
 estado sea `VOTING`. En `REVEALED` los votos quedan congelados.
@@ -171,7 +171,7 @@ Para el portátil de la mesa de control. Sencilla:
 ## Configuración
 
 Un `config.json` en la raíz con: puerto, segundos del cronómetro (60), segundos de
-auto-reset tras revelar (8), y el timeout del heartbeat.
+auto-reset tras revelar (15), y el timeout del heartbeat.
 
 Al arrancar, el servidor imprime en consola las URLs exactas de cada vista con la IP
 de la red local, listas para dictárselas a quien esté configurando los celulares.
@@ -218,7 +218,7 @@ Antes de considerar esto terminado, cada punto debe pasar manualmente:
 7. Un celular queda 30 minutos con la vista abierta y sin tocar: la pantalla sigue
    encendida y el WebSocket sigue vivo.
 8. Se toca el botón blanco 10 veces seguidas rápido: se registra un solo voto.
-9. El auto-reset devuelve a `IDLE` a los 8 s del revelado.
+9. El auto-reset devuelve a `IDLE` a los 15 s del revelado.
 10. La vista de TV se ve correctamente a 1920×1080 sin scroll ni recortes.
 
 ## Estilo de trabajo
