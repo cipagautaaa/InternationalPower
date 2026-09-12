@@ -48,7 +48,11 @@
 
   function updateTimerButton(timer) {
     timerRunning = timer.running
-    timerBtn.textContent = timerRunning ? 'Detener cronómetro' : 'Iniciar cronómetro'
+    const startBlocked = !!timer.startBlocked
+    timerBtn.disabled = startBlocked
+    timerBtn.textContent = startBlocked
+      ? 'Cronómetro bloqueado'
+      : timerRunning ? 'Detener cronómetro' : 'Iniciar cronómetro'
   }
 
   function updateLog(attemptLog) {

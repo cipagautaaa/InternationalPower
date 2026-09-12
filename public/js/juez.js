@@ -61,7 +61,14 @@
 
   function updateTimerButton(timer) {
     timerRunning = timer.running
+    const startBlocked = !!timer.startBlocked
+    timerBtn.disabled = startBlocked
     timerBtn.classList.toggle('running', timerRunning)
+    timerBtn.classList.toggle('blocked', startBlocked)
+    if (startBlocked) {
+      timerBtnLabel.textContent = 'Cronómetro bloqueado'
+      return
+    }
     timerBtnLabel.textContent = timerRunning ? 'Reiniciar cronómetro' : 'Iniciar cronómetro'
   }
 
