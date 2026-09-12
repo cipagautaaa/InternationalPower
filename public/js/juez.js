@@ -79,7 +79,7 @@
   function updateVotingLock(started) {
     votingUnlocked = started
     document.body.classList.toggle('voting-locked', !votingUnlocked)
-    idLabel.textContent = baseIdLabel + (votingUnlocked ? '' : ' · esperando cronómetro')
+    idLabel.textContent = baseIdLabel
   }
 
   function castVote(value) {
