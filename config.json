@@ -1,6 +1,6 @@
 {
   "port": 8080,
   "timerSeconds": 60,
-  "autoResetSeconds": 15,
+  "autoResetSeconds": 10,
   "heartbeatTimeoutMs": 5000
 }
